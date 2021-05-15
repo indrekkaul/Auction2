@@ -1,8 +1,14 @@
 package com.example.auction.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table
 public class UserAccount {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
     private String accountName;
     private String email;
