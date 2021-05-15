@@ -8,6 +8,13 @@ public class Address {
     private String state;
     private String country;
 
+    public int getAddressId() {
+        return AddressId;
+    }
+
+    public void setAddressId(int addressId) {
+        AddressId = addressId;
+    }
 
     public String getStreet() {
         return street;
