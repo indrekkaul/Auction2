@@ -23,9 +23,12 @@ public class UserAccount {
     @Column(name = "password")
     private String password;
 
+    @ManyToOne
     private Address address;
+
     @Column(name = "account_name")
     private Date accountCreated;
+
     private enum accountStatus{ACTIVE, INACTIVE, BLOCKED}
     private enum accountType{STANDARD, PREMIUM}
 

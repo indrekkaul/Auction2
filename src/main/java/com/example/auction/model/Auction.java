@@ -1,105 +1,42 @@
 package com.example.auction.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.util.Date;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "AUCTION")
 public class Auction {
-    private int auctionId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long auctionId;
+    @Column(name = "auction_title")
     private String auctionTitle;
+    @Column(name = "auction_description")
     private String auctionDescription;
+    @ManyToOne
     private Category auctionItemCategory;
+    @Column(name = "minimum_price")
     private double minimumPrice;
+    @Column(name = "buy_now_price")
     private double buyNowPrice;
+    @Column(name = "is_promoted_to_premium")
     private boolean isPromotedToPremium;
+    @ManyToOne
     private Address userLocation;
+    @Column(name = "auction_created")
     private Date auctionCreated;
+    @Column(name = "auction_ending")
     private Date auctionEnding;
+    @Column(name = "number_of_visits")
     private int numberOfVisits;
 
-    public int getAuctionId() {
-        return auctionId;
-    }
 
-    public void setAuctionId(int auctionId) {
-        this.auctionId = auctionId;
-    }
-
-    public String getAuctionTitle() {
-        return auctionTitle;
-    }
-
-    public void setAuctionTitle(String auctionTitle) {
-        this.auctionTitle = auctionTitle;
-    }
-
-    public String getAuctionDescription() {
-        return auctionDescription;
-    }
-
-    public void setAuctionDescription(String auctionDescription) {
-        this.auctionDescription = auctionDescription;
-    }
-
-    public Category getAuctionItemCategory() {
-        return auctionItemCategory;
-    }
-
-    public void setAuctionItemCategory(Category auctionItemCategory) {
-        this.auctionItemCategory = auctionItemCategory;
-    }
-
-    public double getMinimumPrice() {
-        return minimumPrice;
-    }
-
-    public void setMinimumPrice(double minimumPrice) {
-        this.minimumPrice = minimumPrice;
-    }
-
-    public double getBuyNowPrice() {
-        return buyNowPrice;
-    }
-
-    public void setBuyNowPrice(double buyNowPrice) {
-        this.buyNowPrice = buyNowPrice;
-    }
-
-    public boolean isPromotedToPremium() {
-        return isPromotedToPremium;
-    }
-
-    public void setPromotedToPremium(boolean promotedToPremium) {
-        isPromotedToPremium = promotedToPremium;
-    }
-
-    public Address getUserLocation() {
-        return userLocation;
-    }
-
-    public void setUserLocation(Address userLocation) {
-        this.userLocation = userLocation;
-    }
-
-    public Date getAuctionCreated() {
-        return auctionCreated;
-    }
-
-    public void setAuctionCreated(Date auctionCreated) {
-        this.auctionCreated = auctionCreated;
-    }
-
-    public Date getAuctionEnding() {
-        return auctionEnding;
-    }
-
-    public void setAuctionEnding(Date auctionEnding) {
-        this.auctionEnding = auctionEnding;
-    }
-
-    public int getNumberOfVisits() {
-        return numberOfVisits;
-    }
-
-    public void setNumberOfVisits(int numberOfVisits) {
-        this.numberOfVisits = numberOfVisits;
-    }
 }
