@@ -1,13 +1,20 @@
 package com.example.auction.model;
 
 public class Address {
-
+    private int AddressId;
     private String street;
     private int postalCode;
     private String city;
     private String state;
     private String country;
 
+    public int getAddressId() {
+        return AddressId;
+    }
+
+    public void setAddressId(int addressId) {
+        AddressId = addressId;
+    }
 
     public String getStreet() {
         return street;
