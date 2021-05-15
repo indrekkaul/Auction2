@@ -6,7 +6,7 @@ public class Auction {
     private int auctionId;
     private String auctionTitle;
     private String auctionDescription;
-    private String auctionItemCategory;
+    private Category auctionItemCategory;
     private double minimumPrice;
     private double buyNowPrice;
     private boolean isPromotedToPremium;
@@ -39,11 +39,11 @@ public class Auction {
         this.auctionDescription = auctionDescription;
     }
 
-    public String getAuctionItemCategory() {
+    public Category getAuctionItemCategory() {
         return auctionItemCategory;
     }
 
-    public void setAuctionItemCategory(String auctionItemCategory) {
+    public void setAuctionItemCategory(Category auctionItemCategory) {
         this.auctionItemCategory = auctionItemCategory;
     }
 
