@@ -3,6 +3,7 @@ package com.example.auction.model;
 import java.util.Date;
 
 public class UserAccount {
+    private int userId;
     private String accountName;
     private String email;
     private String password;

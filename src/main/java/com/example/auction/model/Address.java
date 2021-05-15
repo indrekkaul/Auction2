@@ -1,7 +1,7 @@
 package com.example.auction.model;
 
 public class Address {
-
+    private int AddressId;
     private String street;
     private int postalCode;
     private String city;
