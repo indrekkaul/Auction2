@@ -23,10 +23,10 @@ public class UserAccount {
     @Column(name = "password")
     private String password;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Address address;
 
-    @Column(name = "account_name")
+    @Column(name = "account_created")
     private Date accountCreated;
 
     private enum accountStatus{ACTIVE, INACTIVE, BLOCKED}
