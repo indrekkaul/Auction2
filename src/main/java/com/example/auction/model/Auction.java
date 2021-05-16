@@ -40,5 +40,7 @@ public class Auction {
 
     private int numberOfVisits;
 
+    private boolean active;
+
 
 }
