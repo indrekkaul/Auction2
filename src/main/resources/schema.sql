@@ -1,1 +1,0 @@
-create SCHEMA if not exists auction;

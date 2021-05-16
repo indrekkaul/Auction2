@@ -30,6 +30,7 @@ public class Auction {
     private BigDecimal buyNowPrice;
 
     private boolean isPromotedToPremium;
+
     @OneToOne
     private Address userLocation;
 
