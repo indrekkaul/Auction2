@@ -5,22 +5,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "BIDDING")
 public class Bidding {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long biddingId;
-    @Column(name = "auction")
+    private Long id;
+    @OneToOne
     private Auction auction;
-    @ManyToMany
+    @OneToOne
     private UserAccount user;
-    @Column(name = "price")
-    private double price;
+
+    private BigDecimal price;
 
 }

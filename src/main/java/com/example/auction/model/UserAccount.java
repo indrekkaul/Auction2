@@ -10,27 +10,29 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "USER_ACCOUNT")
 public class UserAccount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userId;
-    @Column(name = "account_name")
+    private Long id;
+
     private String accountName;
-    @Column(name = "email") // Also User login name!
+
     private String email;
-    @Column(name = "password")
+
     private String password;
 
-    @ManyToOne(optional = false)
+    @OneToOne
     private Address address;
 
-    @Column(name = "account_created")
+
     private Date accountCreated;
 
-    private enum accountStatus{ACTIVE, INACTIVE, BLOCKED}
-    private enum accountType{STANDARD, PREMIUM}
+    @Enumerated(EnumType.STRING)
+    private AccountStatus accountStatus;
+
+    @Enumerated(EnumType.STRING)
+    private AccountType accountType;
 
 
 }

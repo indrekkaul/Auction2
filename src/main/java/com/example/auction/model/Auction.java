@@ -5,37 +5,38 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "AUCTION")
 public class Auction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long auctionId;
-    @Column(name = "auction_title")
-    private String auctionTitle;
-    @Column(name = "auction_description")
-    private String auctionDescription;
-    @ManyToOne
-    private Category auctionItemCategory;
-    @Column(name = "minimum_price")
-    private double minimumPrice;
-    @Column(name = "buy_now_price")
-    private double buyNowPrice;
-    @Column(name = "is_promoted_to_premium")
+    private Long id;
+
+    private String title;
+
+    private String description;
+
+    @OneToOne
+    private Category itemCategory;
+
+    private BigDecimal minimumPrice;
+
+    private BigDecimal buyNowPrice;
+
     private boolean isPromotedToPremium;
-    @ManyToOne
+    @OneToOne
     private Address userLocation;
-    @Column(name = "auction_created")
-    private Date auctionCreated;
-    @Column(name = "auction_ending")
-    private Date auctionEnding;
-    @Column(name = "number_of_visits")
+
+    private Date created;
+
+    private Date ending;
+
     private int numberOfVisits;
 
 

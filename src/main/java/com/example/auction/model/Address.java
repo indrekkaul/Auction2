@@ -10,21 +10,20 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "ADDRESS")
 public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long AddressId;
-    @Column(name = "street")
+    private Long id;
+
     private String street;
-    @Column(name = "zip")
-    private int zip;
-    @Column(name = "city")
+
+    private String zip;
+
     private String city;
-    @Column(name = "state")
+
     private String state;
-    @Column(name = "country")
+
     private String country;
 
 
