@@ -1,40 +1,26 @@
 package com.example.auction.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "BIDDING")
 public class Bidding {
-    private int biddingId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long biddingId;
+    @Column(name = "auction")
     private Auction auction;
+    @ManyToMany
     private UserAccount user;
+    @Column(name = "price")
     private double price;
 
-    public int getBiddingId() {
-        return biddingId;
-    }
-
-    public void setBiddingId(int biddingId) {
-        this.biddingId = biddingId;
-    }
-
-    public Auction getAuction() {
-        return auction;
-    }
-
-    public void setAuction(Auction auction) {
-        this.auction = auction;
-    }
-
-    public UserAccount getUser() {
-        return user;
-    }
-
-    public void setUser(UserAccount user) {
-        this.user = user;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
 }
