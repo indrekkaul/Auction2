@@ -41,12 +41,15 @@ public class AddressServiceImplementation implements AddressService {
     @Override
     public void delete(Long id) {
         Address addressDelete = findOne(id);
-        addressRepository.delete(addressDelete);
-
+        addressDelete.setActive(false);
+        save(addressDelete);
     }
 
     @Override
     public void restore(Long id) {
+        Address addressRestore = findOne(id);
+        addressRestore.setActive(true);
+        save(addressRestore);
 
     }
 }
