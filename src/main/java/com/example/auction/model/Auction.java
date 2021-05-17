@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -34,9 +35,9 @@ public class Auction {
     @OneToOne
     private Address userLocation;
 
-    private Date created;
+    private LocalDate created;
 
-    private Date ending;
+    private LocalDate ending;
 
     private int numberOfVisits;
 
