@@ -13,6 +13,12 @@ public interface BiddingService {
 
     void save(Bidding bidding);
 
+    void update(Long id, Bidding bidding);
+
+    void delete(Long id);
+
+    void restore(Long id);
+
     Optional<Bidding> getBiddingById (long id);
 
     Bidding createBidding(Bidding bidding);
@@ -21,11 +27,7 @@ public interface BiddingService {
 
     List<Bidding> getAllBidsByAuction(long id, Auction auction);
 
-    void delete(Long id);
 
-    void restore(Long id);
-
-    void update(Long id, Bidding bidding);
 
 
 
