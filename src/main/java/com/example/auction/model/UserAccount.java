@@ -34,5 +34,7 @@ public class UserAccount {
     @Enumerated(EnumType.STRING)
     private AccountType accountType;
 
+    private boolean active;
+
 
 }

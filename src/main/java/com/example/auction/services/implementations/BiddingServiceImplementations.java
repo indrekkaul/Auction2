@@ -29,7 +29,7 @@ public class BiddingServiceImplementations implements BiddingService {
     @Override
     public Bidding findOne(Long id) {
         return biddingRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Address not found!"));
+                .orElseThrow(()-> new RuntimeException("User Bids not found!"));
     }
 
     @Override
@@ -51,6 +51,7 @@ public class BiddingServiceImplementations implements BiddingService {
 
     @Override
     public List<Bidding> getAllBidsByUser(long id, UserAccount userAccount) {
+
         return null;
     }
 

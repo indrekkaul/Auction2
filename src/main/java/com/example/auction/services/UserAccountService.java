@@ -18,7 +18,7 @@ public interface UserAccountService {
 
     void restore(Long id);
 
-    List<Bidding> findAllUserBids (Long id, UserAccount userAccount, Bidding bidding);
+    List<Bidding> findAllUserBids (Long id, Bidding bidding);
 
     List<Bidding> findAllActiveUserBids (Long id, UserAccount userAccount, Bidding bidding);
 
