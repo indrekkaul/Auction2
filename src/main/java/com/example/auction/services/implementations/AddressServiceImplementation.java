@@ -19,7 +19,8 @@ public class AddressServiceImplementation implements AddressService {
 
     @Override
     public Address findOne(Long id) {
-        return addressRepository.findById(id).orElseThrow(()-> new RuntimeException("Address not found!"));
+        return addressRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Address not found!"));
     }
 
     @Override

@@ -23,4 +23,8 @@ public class Bidding {
 
     private BigDecimal price;
 
+    private boolean active;
+
+    private int numberOfBidsForCurrentAuction;
+
 }

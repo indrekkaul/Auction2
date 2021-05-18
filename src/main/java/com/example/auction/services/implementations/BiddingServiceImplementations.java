@@ -1,6 +1,8 @@
 package com.example.auction.services.implementations;
 
+import com.example.auction.model.Auction;
 import com.example.auction.model.Bidding;
+import com.example.auction.model.UserAccount;
 import com.example.auction.repositorys.BiddingRepository;
 import com.example.auction.repositorys.UserAccountRepository;
 import com.example.auction.services.BiddingService;
@@ -24,6 +26,18 @@ public class BiddingServiceImplementations implements BiddingService {
     }
 
 
+    @Override
+    public Bidding findOne(Long id) {
+        return biddingRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Address not found!"));
+    }
+
+    @Override
+    public void save(Bidding bidding) {
+        bidding.setNumberOfBidsForCurrentAuction(1);
+        biddingRepository.saveAndFlush(bidding);
+    }
+
 
     @Override
     public Optional<Bidding> getBiddingById(long id) {
@@ -36,17 +50,43 @@ public class BiddingServiceImplementations implements BiddingService {
     }
 
     @Override
-    public List<Bidding> getAllBidsByUser(long id) {
+    public List<Bidding> getAllBidsByUser(long id, UserAccount userAccount) {
         return null;
     }
 
     @Override
-    public List<Bidding> getAllBidsByAuction(long id) {
+    public List<Bidding> getAllBidsByAuction(long id, Auction auction) {
+        //List<Bidding> AllBidsByAuction;
         return null;
     }
 
+
     @Override
-    public boolean deleteTutorial(long id) {
-        return false;
+    public void delete(Long id) {
+        Bidding biddingDelete = findOne(id);
+        biddingDelete.setActive(false);
+        save(biddingDelete);
     }
+
+    @Override
+    public void restore(Long id) {
+        Bidding setActive = findOne(id);
+        setActive.setActive(true);
+        save(setActive);
+
+    }
+
+    @Override
+    public void update(Long id, Bidding bidding) {
+        Bidding oldBid = findOne(bidding.getId());
+        oldBid.setPrice(bidding.getPrice());
+        oldBid.setNumberOfBidsForCurrentAuction(+1);
+
+        save(oldBid);
+    }
+
+
 }
+
+
+
