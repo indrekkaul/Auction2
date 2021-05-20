@@ -20,20 +20,15 @@ import java.util.stream.Stream;
 public class UserAccountServiceImplementation  implements UserAccountService {
 
     UserAccountRepository userAccountRepository;
-    AuctionRepository auctionRepository;
-    AddressRepository addressRepository;
-    BiddingRepository biddingRepository;
+
+
 
 
     @Autowired
-    public UserAccountServiceImplementation(UserAccountRepository userAccountRepository,
-                                            AuctionRepository auctionRepository,
-                                            AddressRepository addressRepository,
-                                            BiddingRepository biddingRepository) {
+    public UserAccountServiceImplementation(UserAccountRepository userAccountRepository) {
         this.userAccountRepository = userAccountRepository;
-        this.auctionRepository = auctionRepository;
-        this.addressRepository = addressRepository;
-        this.biddingRepository = biddingRepository;
+
+
 
     }
 
@@ -75,28 +70,5 @@ public class UserAccountServiceImplementation  implements UserAccountService {
         save(setActive);
     }
 
-    @Override
-    public List<Bidding> findAllUserBids(Long id, Bidding bidding) {
-        //List<Bidding> bidding = biddingRepository
-        //        .findAllById(Iterable<id>, List<Bidding>);
-        //UserAccount findUserId = findOne(id);
-        //List<Bidding> findAllUserBids = bidding.str
 
-        return null;
-    }
-
-    @Override
-    public List<Bidding> findAllActiveUserBids(Long id, UserAccount userAccount, Bidding bidding) {
-        return null;
-    }
-
-    @Override
-    public List<Auction> findAllUserAuctions(Long id, UserAccount userAccount, Auction auction) {
-        return null;
-    }
-
-    @Override
-    public List<Auction> findAllActiveUserAuctions(Long id, UserAccount userAccount, Auction auction) {
-        return null;
-    }
 }

@@ -17,12 +17,11 @@ public class BiddingServiceImplementations implements BiddingService {
 
 
     private final BiddingRepository biddingRepository;
-    private final UserAccountRepository userAccountRepository;
+
 
     @Autowired
-    public BiddingServiceImplementations(BiddingRepository biddingRepository, UserAccountRepository userAccountRepository) {
+    public BiddingServiceImplementations(BiddingRepository biddingRepository) {
         this.biddingRepository = biddingRepository;
-        this.userAccountRepository = userAccountRepository;
     }
 
 
@@ -37,30 +36,6 @@ public class BiddingServiceImplementations implements BiddingService {
         bidding.setNumberOfBidsForCurrentAuction(1);
         biddingRepository.saveAndFlush(bidding);
     }
-
-
-    @Override
-    public Optional<Bidding> getBiddingById(long id) {
-        return biddingRepository.findById(id);
-    }
-
-    @Override
-    public Bidding createBidding(Bidding bidding) {
-        return biddingRepository.save(bidding);
-    }
-
-    @Override
-    public List<Bidding> getAllBidsByUser(long id, UserAccount userAccount) {
-
-        return null;
-    }
-
-    @Override
-    public List<Bidding> getAllBidsByAuction(long id, Auction auction) {
-        //List<Bidding> AllBidsByAuction;
-        return null;
-    }
-
 
     @Override
     public void delete(Long id) {
