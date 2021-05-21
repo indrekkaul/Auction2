@@ -1,27 +1,23 @@
 package com.example.auction.services.implementations;
 
-import com.example.auction.model.Auction;
 import com.example.auction.model.Bidding;
-import com.example.auction.model.UserAccount;
+import com.example.auction.repositorys.AuctionRepository;
 import com.example.auction.repositorys.BiddingRepository;
-import com.example.auction.repositorys.UserAccountRepository;
 import com.example.auction.services.BiddingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BiddingServiceImplementations implements BiddingService {
 
 
     private final BiddingRepository biddingRepository;
-
+    private final AuctionRepository auctionRepository;
 
     @Autowired
-    public BiddingServiceImplementations(BiddingRepository biddingRepository) {
+    public BiddingServiceImplementations(BiddingRepository biddingRepository, AuctionRepository auctionRepository) {
         this.biddingRepository = biddingRepository;
+        this.auctionRepository = auctionRepository;
     }
 
 
@@ -33,7 +29,7 @@ public class BiddingServiceImplementations implements BiddingService {
 
     @Override
     public void save(Bidding bidding) {
-        bidding.setNumberOfBidsForCurrentAuction(1);
+
         biddingRepository.saveAndFlush(bidding);
     }
 
@@ -56,7 +52,8 @@ public class BiddingServiceImplementations implements BiddingService {
     public void update(Long id, Bidding bidding) {
         Bidding oldBid = findOne(bidding.getId());
         oldBid.setPrice(bidding.getPrice());
-        oldBid.setNumberOfBidsForCurrentAuction(+1);
+        //Auction oldNumberOfBids = find
+        //oldNumberOfBids;                      NB!DOES NOT UPDATE Auction table numberOfBids field!!
 
         save(oldBid);
     }

@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -22,6 +21,9 @@ public class Auction {
     private String title;
 
     private String description;
+
+    @ManyToOne
+    private UserAccount userAccount;
 
     @OneToOne
     private Category itemCategory;
@@ -42,6 +44,8 @@ public class Auction {
     private int numberOfVisits;
 
     private boolean active;
+
+    private int numberOfBids;
 
 
 }

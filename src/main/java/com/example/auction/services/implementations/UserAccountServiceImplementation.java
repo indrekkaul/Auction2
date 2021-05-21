@@ -1,28 +1,15 @@
 package com.example.auction.services.implementations;
 
-import com.example.auction.model.Auction;
-import com.example.auction.model.Bidding;
 import com.example.auction.model.UserAccount;
-import com.example.auction.repositorys.AddressRepository;
-import com.example.auction.repositorys.AuctionRepository;
-import com.example.auction.repositorys.BiddingRepository;
 import com.example.auction.repositorys.UserAccountRepository;
 import com.example.auction.services.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 @Service
 public class UserAccountServiceImplementation  implements UserAccountService {
 
     UserAccountRepository userAccountRepository;
-
-
-
 
     @Autowired
     public UserAccountServiceImplementation(UserAccountRepository userAccountRepository) {

@@ -25,6 +25,5 @@ public class Bidding {
 
     private boolean active;
 
-    private int numberOfBidsForCurrentAuction;
 
 }
