@@ -46,6 +46,8 @@ public class AuctionServiceImplementation implements AuctionService {
         oldAuction.setMinimumPrice(auction.getMinimumPrice());
         //oldAuction.setPromotedToPremium(auction.get);
         oldAuction.setTitle(auction.getTitle());
+
+        save(oldAuction);
     }
 
     @Override

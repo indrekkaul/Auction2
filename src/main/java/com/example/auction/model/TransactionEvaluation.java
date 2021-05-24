@@ -21,6 +21,7 @@ public class TransactionEvaluation {
     private int sellerRating;
     private String sellerComment;
     private int buyerRating;
+    private boolean active;
 
 
 }
