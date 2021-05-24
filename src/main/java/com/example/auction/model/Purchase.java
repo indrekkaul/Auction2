@@ -24,4 +24,6 @@ public class Purchase {
 
     private BigDecimal finalPrice;
 
+    private boolean active;
+
 }
