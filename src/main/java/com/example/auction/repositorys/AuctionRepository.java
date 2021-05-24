@@ -9,5 +9,12 @@ import java.util.List;
 
 @Repository
 public interface AuctionRepository extends JpaRepository<Auction, Long> {
-    //List<Auction> findByCategory(Category category);
+
+    List<Auction> findByItemCategory(Category itemCategory);
+
+    List<Auction> findByActive(boolean active);
+
+    List<Auction> findByTitleContaining(String title);
+
+
 }

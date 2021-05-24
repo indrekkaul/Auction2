@@ -10,6 +10,8 @@ public interface AuctionService {
 
     List<Auction> findAll();
 
+    List<Auction> findByTitle(String title);
+
     void save (Auction auction);
 
     void update(Long id, Auction auction);

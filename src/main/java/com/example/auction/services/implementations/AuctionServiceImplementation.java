@@ -32,6 +32,16 @@ public class AuctionServiceImplementation implements AuctionService {
     }
 
     @Override
+    public List<Auction> findByTitle(String title) {
+        if (title == null){
+            return auctionRepository.findAll();
+        }else {
+            return auctionRepository.findByTitleContaining(title);
+        }
+
+    }
+
+    @Override
     public void save(Auction auction) {
         auctionRepository.saveAndFlush(auction);
     }
