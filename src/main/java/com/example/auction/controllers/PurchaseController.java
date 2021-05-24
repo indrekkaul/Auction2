@@ -18,12 +18,13 @@ public class PurchaseController {
     public PurchaseController(PurchaseRepository purchaseRepository) {
         this.purchaseRepository = purchaseRepository;
     }
+
     @GetMapping("/getPurchase")
     public String getPurchase(){
         return "getPurchase";
     }
 
-    @GetMapping("/allpurchases")
+    @GetMapping("/allPurchases")
     List<Purchase> getAllPurchases(){
         return purchaseRepository.findAll();
     }

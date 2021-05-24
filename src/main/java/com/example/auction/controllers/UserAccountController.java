@@ -40,14 +40,14 @@ public class UserAccountController {
        return null;
    }
 
-    @GetMapping("/register")
+    @PutMapping("/registerUser")
     public String showRegistrationFormNewUser(Model model) {
         //model.addAttribute("user", new UserAccount());
 
         return "register";
 
     }
-    @RequestMapping("/allusers")
+    @RequestMapping("/allUsers")
     List<UserAccount> getAllUsers(){
         return userAccountRepository.findAll();
     }
