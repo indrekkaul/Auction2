@@ -27,7 +27,7 @@ public class AddressController {
         return "register";
 
     }
-    @RequestMapping("/address")
+    @RequestMapping("/allAddress")
     List<Address> getAllUsers(){
         return addressRepository.findAll();
     }
