@@ -12,6 +12,8 @@ public interface AuctionService {
 
     List<Auction> findByTitle(String title);
 
+    List<Auction> findByTitleAndIsActive(String title, boolean active);
+
     void save (Auction auction);
 
     void update(Long id, Auction auction);

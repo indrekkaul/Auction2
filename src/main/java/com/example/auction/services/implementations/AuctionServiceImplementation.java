@@ -42,6 +42,11 @@ public class AuctionServiceImplementation implements AuctionService {
     }
 
     @Override
+    public List<Auction> findByTitleAndIsActive(String title, boolean active) {
+        return auctionRepository.findByTitleContainingAndActive(title,true);
+    }
+
+    @Override
     public void save(Auction auction) {
         auctionRepository.saveAndFlush(auction);
     }

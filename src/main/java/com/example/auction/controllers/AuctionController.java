@@ -44,6 +44,20 @@ public class AuctionController {
 
     //List<Auction> getAllAuctions() {        return auctionRepository.findAll();    }
 
+    /**
+     * GET: <code>active auctions</code>
+     * @return all active auctions in database
+     * @param title and active to lookup the database for - optional
+     */
+    @GetMapping("/active_auctions")
+    public ResponseEntity<List<Auction>> getAllActiveAuctions(@RequestParam(required = false) String title, boolean active){
+        List<Auction> auctions = auctionServiceImplementation.findByTitleAndIsActive(title,true);
+        if (auctions.isEmpty()){
+            return new ResponseEntity<>(Collections.emptyList(), HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(auctions,HttpStatus.OK);
+    }
+
     @PutMapping("/registerAuction")
     public String showRegistrationFormNewAuction(Model model){
 
