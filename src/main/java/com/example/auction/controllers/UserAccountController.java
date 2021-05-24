@@ -47,7 +47,7 @@ public class UserAccountController {
         return "register";
 
     }
-    @RequestMapping("/all")
+    @RequestMapping("/allusers")
     List<UserAccount> getAllUsers(){
         return userAccountRepository.findAll();
     }
