@@ -14,8 +14,6 @@ public interface AuctionRepository extends JpaRepository<Auction, Long> {
 
     List<Auction> findByActive(boolean active);
 
-    List<Auction> findByTitleContainingAndActive(String title, boolean active);
-
     List<Auction> findByTitleContaining(String title);
 
 

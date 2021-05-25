@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuctionServiceImplementation implements AuctionService {
@@ -20,9 +21,9 @@ public class AuctionServiceImplementation implements AuctionService {
     }
 
     @Override
-    public Auction findOne(Long id) {
-        return auctionRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Auction not found!"));
+    public Optional<Auction> findOne(Long id) {
+        return auctionRepository.findById(id);
+                //.orElseThrow(()-> new RuntimeException("Auction not found!"));
     }
 
     @Override
@@ -42,40 +43,46 @@ public class AuctionServiceImplementation implements AuctionService {
     }
 
     @Override
-    public List<Auction> findByTitleAndIsActive(String title, boolean active) {
-        return auctionRepository.findByTitleContainingAndActive(title,true);
+    public List<Auction> findByActive(boolean active) {
+        return auctionRepository.findByActive(true);
     }
 
     @Override
-    public void save(Auction auction) {
-        auctionRepository.saveAndFlush(auction);
+    public Auction save(Auction auction) {
+        return auctionRepository.saveAndFlush(auction);
     }
 
     @Override
-    public void update(Long id, Auction auction) {
-        Auction oldAuction = findOne(auction.getId());
-        oldAuction.setDescription(auction.getDescription());
-        oldAuction.setBuyNowPrice(auction.getBuyNowPrice());
-        oldAuction.setEnding(auction.getEnding());
-        oldAuction.setItemCategory(auction.getItemCategory());
-        oldAuction.setMinimumPrice(auction.getMinimumPrice());
-        //oldAuction.setPromotedToPremium(auction.get);
-        oldAuction.setTitle(auction.getTitle());
+    public Auction update(Long id, Auction newAuction) {
+        Optional<Auction> oldAuction = findOne(id);
+        if (oldAuction.isPresent()) {
+            Auction tempAuction = oldAuction.get();
+            tempAuction.setDescription(newAuction.getDescription());
+            tempAuction.setBuyNowPrice(newAuction.getBuyNowPrice());
+            tempAuction.setEnding(newAuction.getEnding());
+            tempAuction.setItemCategory(newAuction.getItemCategory());
+            tempAuction.setMinimumPrice(newAuction.getMinimumPrice());
+            //oldAuction.setPromotedToPremium(auction.get);
+            tempAuction.setTitle(newAuction.getTitle());
 
-        save(oldAuction);
+            return auctionRepository.save(tempAuction);
+        }else {
+            return null;
+        }
     }
 
     @Override
-    public void delete(Long id) {
-        Auction auctionDelete = findOne(id);
+    public boolean delete(Long id) {
+        Auction auctionDelete = auctionRepository.getOne(id);
         auctionDelete.setActive(false);
         save(auctionDelete);
+        return true;
 
     }
 
     @Override
     public void restore(Long id) {
-        Auction auctionRestore = findOne(id);
+        Auction auctionRestore = auctionRepository.getOne(id);
         auctionRestore.setActive(true);
         save(auctionRestore);
     }

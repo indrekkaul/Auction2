@@ -3,22 +3,23 @@ package com.example.auction.services;
 import com.example.auction.model.Auction;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AuctionService {
 
-    Auction findOne(Long id);
+    Optional<Auction> findOne(Long id);
 
     List<Auction> findAll();
 
     List<Auction> findByTitle(String title);
 
-    List<Auction> findByTitleAndIsActive(String title, boolean active);
+    List<Auction> findByActive(boolean active);
 
-    void save (Auction auction);
+    Auction save (Auction auction);
 
-    void update(Long id, Auction auction);
+    Auction update(Long id, Auction newAuction);
 
-    void delete (Long id);
+    boolean delete (Long id);
 
     void restore (Long id);
 }
