@@ -3,16 +3,23 @@ package com.example.auction.services;
 import com.example.auction.model.Address;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AddressService {
 
-    Address findOne(Long id);
+    Optional<Address> findOne(Long id);
 
-    void save(Address address);
+    List<Address> findAll();
 
-    void update(Long id, Address address);
+    List<Address> findByStreet(String street);
 
-    void delete(Long id);
+    List<Address> findByCity(String city);
+
+    Address save(Address address);
+
+    Address update(Long id, Address address);
+
+    boolean delete(Long id);
 
     void restore(Long id);
 }
