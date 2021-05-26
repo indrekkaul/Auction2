@@ -1,11 +1,15 @@
 package com.example.auction.services.implementations;
 
 import com.example.auction.model.Bidding;
+import com.example.auction.model.UserAccount;
 import com.example.auction.repositorys.AuctionRepository;
 import com.example.auction.repositorys.BiddingRepository;
 import com.example.auction.services.BiddingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BiddingServiceImplementations implements BiddingService {
@@ -20,42 +24,54 @@ public class BiddingServiceImplementations implements BiddingService {
         this.auctionRepository = auctionRepository;
     }
 
-
     @Override
-    public Bidding findOne(Long id) {
-        return biddingRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("User Bids not found!"));
+    public Optional<Bidding> findOne(Long id) {
+        return biddingRepository.findById(id);
     }
 
     @Override
-    public void save(Bidding bidding) {
-
-        biddingRepository.saveAndFlush(bidding);
+    public List<Bidding> findByUserAndActive(UserAccount userAccount, boolean active) {
+        List<Bidding> findByUserAndActive = biddingRepository.findAllByUserAndActive(userAccount,true);
+        return findByUserAndActive;
     }
 
     @Override
-    public void delete(Long id) {
-        Bidding biddingDelete = findOne(id);
+    public List<Bidding> findAll() {
+        return null;
+    }
+
+    @Override
+    public Bidding save(Bidding bidding) {
+        return biddingRepository.saveAndFlush(bidding);
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        Bidding biddingDelete = biddingRepository.getOne(id);
         biddingDelete.setActive(false);
         save(biddingDelete);
+        return true;
     }
 
     @Override
     public void restore(Long id) {
-        Bidding setActive = findOne(id);
+        Bidding setActive = biddingRepository.getOne(id);
         setActive.setActive(true);
         save(setActive);
 
     }
 
     @Override
-    public void update(Long id, Bidding bidding) {
-        Bidding oldBid = findOne(bidding.getId());
-        oldBid.setPrice(bidding.getPrice());
-        //Auction oldNumberOfBids = find
-        //oldNumberOfBids;                      NB!DOES NOT UPDATE Auction table numberOfBids field!!
+    public Bidding update(Long id, Bidding newBid) {
+        Optional<Bidding> oldBid = findOne(id);
+        if (oldBid.isPresent()){
+            Bidding tempBid = oldBid.get();
+            tempBid.setPrice(newBid.getPrice());
+            return save(tempBid);
+        } else {
+            return null;
+        }
 
-        save(oldBid);
     }
 
 

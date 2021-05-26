@@ -35,7 +35,7 @@ public class AuctionController {
 
     /**
      * GET: <code>/auctions</code>
-     * @return all auctions in database
+     * @return all auctions by Title in database
      * @param title to lookup the database for - optional
      */
     @GetMapping("/auctions")

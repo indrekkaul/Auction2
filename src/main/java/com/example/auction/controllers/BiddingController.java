@@ -1,32 +1,67 @@
 package com.example.auction.controllers;
 
 import com.example.auction.model.Bidding;
-import com.example.auction.repositorys.BiddingRepository;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.auction.model.UserAccount;
+import com.example.auction.services.implementations.BiddingServiceImplementations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
 public class BiddingController {
 
-    BiddingRepository biddingRepository;
+    BiddingServiceImplementations biddingServiceImplementations;
 
-    public BiddingController(BiddingRepository biddingRepository) {
-        this.biddingRepository = biddingRepository;
+    @Autowired
+    public BiddingController(BiddingServiceImplementations biddingServiceImplementations) {
+        this.biddingServiceImplementations = biddingServiceImplementations;
     }
 
-    @GetMapping("/registerNewBid")
-    public String showRegistrationFormNewBid(Model model) {
-        //model.addAttribute("Bid", new Bidding());
-
-        return "register";
-
+    /**
+     * POST: <code>/new_bid</code>
+     *
+     * @param bidding The Bidding to persist in database
+     * @return created bidding
+     */
+    @PostMapping("/new_bid")
+    public ResponseEntity<Bidding> createBid(@RequestBody Bidding bidding) {
+        Bidding newBidding = biddingServiceImplementations.save(bidding);
+        return new ResponseEntity<>(newBidding, HttpStatus.CREATED);
     }
-    @RequestMapping("/bidding")
-    List<Bidding> getBids(){
-        return biddingRepository.findAll();
+
+    /**
+     * GET: <code>/user_bids</code>
+     * @return all active user bids in database
+     * @param userAccount active bids to lookup
+     */
+
+    @GetMapping("/user_bids")
+    public ResponseEntity<List<Bidding>> getAllUserBids(@RequestParam(required = false) UserAccount userAccount, boolean active){
+        List<Bidding> allUserActiveBids = biddingServiceImplementations.findByUserAndActive(userAccount,true);
+        if (allUserActiveBids.isEmpty()){
+            return new ResponseEntity<>(Collections.emptyList(), HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(allUserActiveBids,HttpStatus.OK);
     }
+
+    /**
+     * PUT: <code>/bidding/id</code>
+     *
+     * @param id        The id of the old bid to replace
+     * @param bidding   The new bid
+     * @return updated bidding in database
+     */
+    @PutMapping("/bidding/{id}")
+    public ResponseEntity<Bidding> updateBidding(@PathVariable("id") Long id, @RequestBody Bidding bidding){
+        Bidding newBid = biddingServiceImplementations.update(id,bidding);
+        if (newBid == null){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(newBid,HttpStatus.OK);
+    }
+
 }
