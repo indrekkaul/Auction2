@@ -51,12 +51,12 @@ public class AuctionController {
 
     /**
      * GET: <code>/active_auctions</code>
-     * @return all active auctions in database
-     * @param active & active to lookup the database for - optional
+     * @return all active(NB! ending date is not passed) auctions in database
+     *
      */
     @GetMapping("/active_auctions")
-    public ResponseEntity<List<Auction>> getAllActiveAuctions(@RequestParam(required = false) boolean active){
-        List<Auction> auctions = auctionServiceImplementation.findByActive(true);
+    public ResponseEntity<List<Auction>> getAllActiveAuctions(){
+        List<Auction> auctions = auctionServiceImplementation.findByEndigIsGreaterTheCurrentDate();
         if (auctions.isEmpty()){
             return new ResponseEntity<>(Collections.emptyList(), HttpStatus.NO_CONTENT);
         }

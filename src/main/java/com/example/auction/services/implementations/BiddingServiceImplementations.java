@@ -1,5 +1,6 @@
 package com.example.auction.services.implementations;
 
+import com.example.auction.model.Auction;
 import com.example.auction.model.Bidding;
 import com.example.auction.model.UserAccount;
 import com.example.auction.repositorys.AuctionRepository;
@@ -42,7 +43,11 @@ public class BiddingServiceImplementations implements BiddingService {
 
     @Override
     public Bidding save(Bidding bidding) {
-        return biddingRepository.saveAndFlush(bidding);
+
+         biddingRepository.saveAndFlush(bidding);
+         Auction addNumberOfBidsToAuction = bidding.getAuction();
+         addNumberOfBidsToAuction.setNumberOfBids(addNumberOfBidsToAuction.getNumberOfBids()+1);
+         return null;
     }
 
     @Override
@@ -67,6 +72,8 @@ public class BiddingServiceImplementations implements BiddingService {
         if (oldBid.isPresent()){
             Bidding tempBid = oldBid.get();
             tempBid.setPrice(newBid.getPrice());
+            Auction addNumberOfBidsToAuction = newBid.getAuction();
+            addNumberOfBidsToAuction.setNumberOfBids(addNumberOfBidsToAuction.getNumberOfBids()+1);
             return save(tempBid);
         } else {
             return null;

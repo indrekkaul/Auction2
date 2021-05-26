@@ -15,11 +15,19 @@ public interface AuctionService {
 
     List<Auction> findByActive(boolean active);
 
+    List<Auction> findByEndigIsGreaterTheCurrentDate();
+
     Auction save (Auction auction);
 
     Auction update(Long id, Auction newAuction);
 
+    Auction updateNumberOfBids(Long id);
+
     boolean delete (Long id);
+
+    boolean promoteAuction (Long id);
+
+    boolean demoteAuction (Long id);
 
     void restore (Long id);
 }
