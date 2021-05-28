@@ -5,12 +5,13 @@ import com.example.auction.services.implementations.AuctionServiceImplementation
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
 
-@RestController
+@Controller
 public class AuctionController {
 
 
@@ -40,7 +41,7 @@ public class AuctionController {
      */
     @GetMapping("/auctions")
     public ResponseEntity<List<Auction>> getAllAuctions(@RequestParam(required = false) String title){
-        List<Auction> auctions = auctionServiceImplementation.findByTitle(title);
+        List<Auction> auctions = auctionServiceImplementation.findAll();
         if (auctions.isEmpty()){
             return new ResponseEntity<>(Collections.emptyList(), HttpStatus.NO_CONTENT);
         }

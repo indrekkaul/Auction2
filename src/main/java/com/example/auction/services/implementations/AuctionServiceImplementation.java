@@ -1,11 +1,12 @@
 package com.example.auction.services.implementations;
 
 import com.example.auction.model.Auction;
+import com.example.auction.model.Bidding;
 import com.example.auction.repositorys.AuctionRepository;
+import com.example.auction.repositorys.BiddingRepository;
 import com.example.auction.services.AuctionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +17,11 @@ public class AuctionServiceImplementation implements AuctionService {
 
     AuctionRepository auctionRepository;
 
+
     @Autowired
     public AuctionServiceImplementation(AuctionRepository auctionRepository) {
         this.auctionRepository = auctionRepository;
+
     }
 
     @Override
@@ -34,28 +37,18 @@ public class AuctionServiceImplementation implements AuctionService {
     }
 
     @Override
-    public List<Auction> findByTitle(String title) {
-        if (title == null){
-            return auctionRepository.findAll();
-        }else {
-            return auctionRepository.findByTitleContaining(title);
-        }
-
-    }
-
-    @Override
-    public List<Auction> findByActive(boolean active) {
-        return auctionRepository.findByActive(true);
-    }
-
-    @Override
     public List<Auction> findByEndigIsGreaterTheCurrentDate() {
         return auctionRepository.findAllByEndingAfter(LocalDate.now());
     }
 
     @Override
-    public Auction save(Auction auction) {
+    public List<Auction> findByActive(boolean active) {
+        auctionRepository.findAllByEndingAfter(LocalDate.now()).forEach(auction -> auction.setActive(false));
+        return auctionRepository.findByActive(true);
+    }
 
+    @Override
+    public Auction save(Auction auction) {
         return auctionRepository.saveAndFlush(auction);
     }
 
@@ -75,14 +68,6 @@ public class AuctionServiceImplementation implements AuctionService {
         }else {
             return null;
         }
-    }
-
-    @Override
-    public Auction updateNumberOfBids(Long id) {
-        Auction updateNumberOfBidsByOne = auctionRepository.getOne(id);
-        updateNumberOfBidsByOne.setNumberOfBids(updateNumberOfBidsByOne.getNumberOfBids()+1);
-        return save(updateNumberOfBidsByOne);
-
     }
 
     @Override

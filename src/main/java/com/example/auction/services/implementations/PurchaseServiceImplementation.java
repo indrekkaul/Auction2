@@ -33,9 +33,8 @@ public class PurchaseServiceImplementation  implements PurchaseService {
     public void update(Long id, Purchase purchase) {
         Purchase purchaseOld = findOne(purchase.getId());
         purchaseOld.setFinalPrice(purchase.getFinalPrice());
-        purchaseOld.setAuctions(purchase.getAuctions());
-        purchaseOld.setUser(purchase.getUser());
-
+        purchaseOld.setAuction(purchase.getAuction());
+        purchaseOld.setSeller(purchase.getSeller());
         save(purchaseOld);
     }
 

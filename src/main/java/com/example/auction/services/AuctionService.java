@@ -11,8 +11,6 @@ public interface AuctionService {
 
     List<Auction> findAll();
 
-    List<Auction> findByTitle(String title);
-
     List<Auction> findByActive(boolean active);
 
     List<Auction> findByEndigIsGreaterTheCurrentDate();
@@ -20,8 +18,6 @@ public interface AuctionService {
     Auction save (Auction auction);
 
     Auction update(Long id, Auction newAuction);
-
-    Auction updateNumberOfBids(Long id);
 
     boolean delete (Long id);
 

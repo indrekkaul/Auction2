@@ -13,11 +13,17 @@ public interface BiddingService {
 
     List<Bidding> findByUserAndActive (UserAccount userAccount, boolean active);
 
+    List<Bidding> findBidsByAuction(Long auction_Id);
+
+    Bidding getNumberOfBidsForAuction(Long auction_id);
+
     List<Bidding> findAll();
 
     Bidding save(Bidding bidding);
 
     Bidding update(Long id, Bidding newBid);
+
+    Bidding getBestBid(Long id);
 
     boolean delete(Long id);
 

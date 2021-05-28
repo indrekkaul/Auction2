@@ -23,7 +23,7 @@ public class Auction {
     private String description;
 
     @ManyToOne
-    private UserAccount userAccount;
+    private UserAccount seller;
 
     @OneToOne
     private Category itemCategory;
@@ -44,8 +44,6 @@ public class Auction {
     private int numberOfVisits;
 
     private boolean active;
-
-    private int numberOfBids;
 
 
 }

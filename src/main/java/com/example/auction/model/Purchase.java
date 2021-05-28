@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -17,10 +16,15 @@ public class Purchase {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToMany
-    private List<Auction> auctions;
+
     @OneToOne
-    private UserAccount user;
+    private Auction auction;
+
+    @OneToOne
+    private UserAccount seller;
+
+    @OneToOne
+    private UserAccount buyer;
 
     private BigDecimal finalPrice;
 

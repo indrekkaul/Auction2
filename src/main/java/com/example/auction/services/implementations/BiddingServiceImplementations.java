@@ -9,6 +9,8 @@ import com.example.auction.services.BiddingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +39,17 @@ public class BiddingServiceImplementations implements BiddingService {
     }
 
     @Override
+    public List<Bidding> findBidsByAuction(Long auction_id) {
+        List<Bidding> bidsByAuction = biddingRepository.findBiddingsByAuction(auction_id);
+        return bidsByAuction;
+    }
+
+    @Override
+    public Bidding getNumberOfBidsForAuction(Long auction_id) {
+        return biddingRepository.countBiddingsByAuction(auction_id);
+    }
+
+    @Override
     public List<Bidding> findAll() {
         return null;
     }
@@ -45,8 +58,12 @@ public class BiddingServiceImplementations implements BiddingService {
     public Bidding save(Bidding bidding) {
 
          biddingRepository.saveAndFlush(bidding);
-         Auction addNumberOfBidsToAuction = bidding.getAuction();
-         addNumberOfBidsToAuction.setNumberOfBids(addNumberOfBidsToAuction.getNumberOfBids()+1);
+         Auction auction = bidding.getAuction();
+
+         if (auction.getBuyNowPrice().compareTo(bidding.getPrice())==-1
+                 | auction.getBuyNowPrice().compareTo(bidding.getPrice())==0){
+            auction.setActive(false);
+         }
          return null;
     }
 
@@ -72,13 +89,17 @@ public class BiddingServiceImplementations implements BiddingService {
         if (oldBid.isPresent()){
             Bidding tempBid = oldBid.get();
             tempBid.setPrice(newBid.getPrice());
-            Auction addNumberOfBidsToAuction = newBid.getAuction();
-            addNumberOfBidsToAuction.setNumberOfBids(addNumberOfBidsToAuction.getNumberOfBids()+1);
             return save(tempBid);
         } else {
             return null;
         }
 
+    }
+
+    @Override
+    public Bidding getBestBid(Long auction_id) {
+        Bidding winnerBid = Collections.max(findBidsByAuction(auction_id), Comparator.comparing(Bidding::getPrice));
+        return winnerBid;
     }
 
 

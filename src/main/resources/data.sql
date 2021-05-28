@@ -1,10 +1,12 @@
 delete from bidding;
+delete from transaction_evaluation;
+delete from purchase_auctions;
 delete from auction;
+delete from purchase;
 delete from user_account;
 delete from category;
 delete from address;
-delete from purchase;
-delete from transaction_evaluation;
+
 
 insert into auctiondb.address(id, active, city, country, state, street, zip)
 VALUES('1',1,'Tallinn','Estonia','111','111','12345');
@@ -33,6 +35,8 @@ insert into auctiondb.auction(id, active, buy_now_price, created, description, e
 VALUE (2,1,5000,'20.05.21','Second Auction','20.05.23',1,100,0,0,'Chek out Second Auction',2,2,2);
 insert into auctiondb.auction(id, active, buy_now_price, created, description, ending, is_promoted_to_premium, minimum_price, number_of_bids, number_of_visits, title, item_category_id, user_account_id, user_location_id)
 VALUE (3,1,100000,'20.05.21','Third Auction','20.05.26',1,5000,0,0,'Chek out Third Auction',3,3,3);
+insert into auctiondb.auction(id, active, buy_now_price, created, description, ending, is_promoted_to_premium, minimum_price, number_of_bids, number_of_visits, title, item_category_id, user_account_id, user_location_id)
+VALUES (4,0,500,'23.05.21','Old Car','26.05.21',1,100,3,100,'Very old Car',3,1,1);
 
 insert into auctiondb.bidding(id, active, price, auction_id, user_id)
 VALUES (1,1,300,1,1);
@@ -40,4 +44,15 @@ insert into auctiondb.bidding(id, active, price, auction_id, user_id)
 VALUES (2,1,4000,2,2);
 insert into auctiondb.bidding(id, active, price, auction_id, user_id)
 VALUES (3,1,30000,3,3);
+insert into auctiondb.bidding(id, active, price, auction_id, user_id)
+VALUES (4,0,800,4,1);
+
+insert into auctiondb.purchase(id, final_price, user_id, active)
+VALUES (1,800,1,1);
+
+insert into auctiondb.transaction_evaluation (id, buyer_rating, seller_comment, seller_rating, purchase_id, active)
+VALUES (1,5,'NC sell',5,1,1);
+
+insert into auctiondb.purchase_auctions(purchase_id, auctions_id)
+VALUES (1,4);
 
