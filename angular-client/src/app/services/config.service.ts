@@ -6,7 +6,7 @@ import {HttpHeaders} from "@angular/common/http";
 })
 export class ConfigService {
 
-  private BASE_HREF = 'http://localhost:4200/';
+  private BASE_HREF = 'http://localhost:8080/';
   private HEADERS = new HttpHeaders({
     'Content-type': 'application/json',
     'Accept': 'application/json'
