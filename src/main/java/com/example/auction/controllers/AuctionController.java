@@ -1,26 +1,21 @@
 package com.example.auction.controllers;
 
 import com.example.auction.model.Auction;
-import com.example.auction.services.implementations.AuctionServiceImplementation;
+import com.example.auction.services.AuctionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
 
-@Controller
+@RestController
 public class AuctionController {
 
-
-    AuctionServiceImplementation auctionServiceImplementation;
-
     @Autowired
-    public AuctionController(AuctionServiceImplementation auctionServiceImplementation) {
-        this.auctionServiceImplementation = auctionServiceImplementation;
-    }
+    private AuctionService auctionService;
+
 
     /**
      * POST: <code>/new_auction</code>
@@ -30,7 +25,7 @@ public class AuctionController {
      */
     @PostMapping("/new_auction")
     public ResponseEntity<Auction> createAuction(@RequestBody Auction auction) {
-        Auction newAuction = auctionServiceImplementation.save(auction);
+        Auction newAuction = auctionService.save(auction);
         return new ResponseEntity<>(newAuction, HttpStatus.CREATED);
     }
 
@@ -41,7 +36,7 @@ public class AuctionController {
      */
     @GetMapping("/auctions")
     public ResponseEntity<List<Auction>> getAllAuctions(@RequestParam(required = false) String title){
-        List<Auction> auctions = auctionServiceImplementation.findAll();
+        List<Auction> auctions = auctionService.findAll();
         if (auctions.isEmpty()){
             return new ResponseEntity<>(Collections.emptyList(), HttpStatus.NO_CONTENT);
         }
@@ -57,7 +52,7 @@ public class AuctionController {
      */
     @GetMapping("/active_auctions")
     public ResponseEntity<List<Auction>> getAllActiveAuctions(){
-        List<Auction> auctions = auctionServiceImplementation.findByEndigIsGreaterTheCurrentDate();
+        List<Auction> auctions = auctionService.findByEndigIsGreaterTheCurrentDate();
         if (auctions.isEmpty()){
             return new ResponseEntity<>(Collections.emptyList(), HttpStatus.NO_CONTENT);
         }
@@ -74,7 +69,7 @@ public class AuctionController {
      */
     @PutMapping("/auction/{id}")
     public ResponseEntity<Auction> updateAuction(@PathVariable("id") Long id, @RequestBody Auction auction){
-       Auction newAuction = auctionServiceImplementation.update(id,auction);
+       Auction newAuction = auctionService.update(id,auction);
         if (newAuction == null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -89,7 +84,7 @@ public class AuctionController {
 
     @DeleteMapping("/auction/{id}")
     public ResponseEntity<HttpStatus> deleteAuction(@PathVariable("id") Long id){
-        boolean success = auctionServiceImplementation.delete(id);
+        boolean success = auctionService.delete(id);
         if (success){
             return new ResponseEntity<>(HttpStatus.OK);
         }
