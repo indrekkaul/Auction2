@@ -7,12 +7,14 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AuctionComponent } from './components/auction/auction.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
+import { CategoryComponent } from './components/category/category.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    AuctionComponent
+    AuctionComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,

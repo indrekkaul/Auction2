@@ -4,6 +4,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Category} from '../models/category';
 import {ConfigService} from './config.service'
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,10 +25,10 @@ export class CategoryService {
     return this.http.post<Category>(this.uri(), category);
   }
 
-  // delete(category: Category) {
-  //   return this.http.delete(this.uri(), {
-  //     params: new HttpParams().set('delete', category.name)
-  //   });
-  // }
+  delete(category: Category) {
+    return this.http.delete(this.uri(), {
+      params: new HttpParams().set('delete', category.name)
+    });
+  }
 
 }
