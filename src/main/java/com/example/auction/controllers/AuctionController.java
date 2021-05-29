@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
+@RequestMapping("/auction")
 public class AuctionController {
 
     @Autowired
@@ -23,7 +24,7 @@ public class AuctionController {
      * @param auction The Auction to persist in database
      * @return created auction
      */
-    @PostMapping("/new_auction")
+    @PostMapping
     public ResponseEntity<Auction> createAuction(@RequestBody Auction auction) {
         Auction newAuction = auctionService.save(auction);
         return new ResponseEntity<>(newAuction, HttpStatus.CREATED);

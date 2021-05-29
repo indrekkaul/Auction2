@@ -25,7 +25,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
     this.getCategories();
     this.subscribeCategoryListChanged();
     this.interact._categoryTabToggled
-     // .takeWhile(() => this.alive)
+      //.takeWhile(() => this.alive)
       .subscribe(() => {
         this.isOpen = !this.isOpen;
       })
