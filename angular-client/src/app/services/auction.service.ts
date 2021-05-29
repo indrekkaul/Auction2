@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import {ConfigService} from "./config.service";
 import {Auction} from "../models/auction";
 
+const auctions = 'http://localhost:8080/auctions'
+
 @Injectable({
   providedIn: 'root'
 })
