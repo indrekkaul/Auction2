@@ -7,15 +7,19 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AuctionComponent } from './components/auction/auction.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
+import { CategoryComponent } from './components/category/category.component';
+
 import { AddAuctionComponent } from './components/auction/add-auction/add-auction.component';
 import { ActiveAuctionComponent } from './components/auction/active-auction/active-auction.component';
 import { ActiveAuctionsComponent } from './components/auction/active-auctions/active-auctions.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     AuctionComponent,
+    CategoryComponent
     AddAuctionComponent,
     ActiveAuctionComponent,
     ActiveAuctionsComponent
