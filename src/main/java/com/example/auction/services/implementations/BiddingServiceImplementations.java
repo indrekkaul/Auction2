@@ -17,15 +17,8 @@ import java.util.Optional;
 @Service
 public class BiddingServiceImplementations implements BiddingService {
 
-
-    private final BiddingRepository biddingRepository;
-    private final AuctionRepository auctionRepository;
-
     @Autowired
-    public BiddingServiceImplementations(BiddingRepository biddingRepository, AuctionRepository auctionRepository) {
-        this.biddingRepository = biddingRepository;
-        this.auctionRepository = auctionRepository;
-    }
+    private  BiddingRepository biddingRepository;
 
     @Override
     public Optional<Bidding> findOne(Long id) {

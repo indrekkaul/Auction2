@@ -15,14 +15,8 @@ import java.util.Optional;
 @Service
 public class AuctionServiceImplementation implements AuctionService {
 
-    AuctionRepository auctionRepository;
-
-
     @Autowired
-    public AuctionServiceImplementation(AuctionRepository auctionRepository) {
-        this.auctionRepository = auctionRepository;
-
-    }
+    private AuctionRepository auctionRepository;
 
     @Override
     public Optional<Auction> findOne(Long id) {

@@ -2,6 +2,7 @@ package com.example.auction.controllers;
 
 import com.example.auction.model.Address;
 import com.example.auction.repositorys.AddressRepository;
+import com.example.auction.services.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +14,8 @@ import java.util.List;
 @RestController
 public class AddressController {
 
-    AddressRepository addressRepository;
-
     @Autowired
-    public AddressController(AddressRepository addressRepository) {
-        this.addressRepository = addressRepository;
-    }
+    private AddressService addressService;
 
     @GetMapping("/registerAddress")
     public String showRegistrationFormNewAddress(Model model) {
@@ -29,7 +26,7 @@ public class AddressController {
     }
     @RequestMapping("/allAddress")
     List<Address> getAllUsers(){
-        return addressRepository.findAll();
+        return addressService.findAll();
     }
 
 

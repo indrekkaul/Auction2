@@ -9,15 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserAccountServiceImplementation  implements UserAccountService {
 
-    UserAccountRepository userAccountRepository;
-
     @Autowired
-    public UserAccountServiceImplementation(UserAccountRepository userAccountRepository) {
-        this.userAccountRepository = userAccountRepository;
-
-
-
-    }
+    private UserAccountRepository userAccountRepository;
 
     @Override
     public UserAccount findOne(Long id) {
