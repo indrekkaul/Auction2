@@ -2,6 +2,7 @@ package com.example.auction.controllers;
 
 import com.example.auction.model.Bidding;
 import com.example.auction.model.UserAccount;
+import com.example.auction.services.BiddingService;
 import com.example.auction.services.implementations.BiddingServiceImplementations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,12 +15,8 @@ import java.util.List;
 @RestController
 public class BiddingController {
 
-    BiddingServiceImplementations biddingServiceImplementations;
-
     @Autowired
-    public BiddingController(BiddingServiceImplementations biddingServiceImplementations) {
-        this.biddingServiceImplementations = biddingServiceImplementations;
-    }
+    private BiddingService biddingService;
 
     /**
      * POST: <code>/new_bid</code>
@@ -29,7 +26,7 @@ public class BiddingController {
      */
     @PostMapping("/new_bid")
     public ResponseEntity<Bidding> createBid(@RequestBody Bidding bidding) {
-        Bidding newBidding = biddingServiceImplementations.save(bidding);
+        Bidding newBidding = biddingService.save(bidding);
         return new ResponseEntity<>(newBidding, HttpStatus.CREATED);
     }
 
@@ -41,7 +38,7 @@ public class BiddingController {
 
     @GetMapping("/user_bids")
     public ResponseEntity<List<Bidding>> getAllUserBids(@RequestParam(required = false) UserAccount userAccount, boolean active){
-        List<Bidding> allUserActiveBids = biddingServiceImplementations.findByUserAndActive(userAccount,true);
+        List<Bidding> allUserActiveBids = biddingService.findByUserAndActive(userAccount,true);
         if (allUserActiveBids.isEmpty()){
             return new ResponseEntity<>(Collections.emptyList(), HttpStatus.NO_CONTENT);
         }
@@ -57,7 +54,7 @@ public class BiddingController {
      */
     @PutMapping("/bidding/{id}")
     public ResponseEntity<Bidding> updateBidding(@PathVariable("id") Long id, @RequestBody Bidding bidding){
-        Bidding newBid = biddingServiceImplementations.update(id,bidding);
+        Bidding newBid = biddingService.update(id,bidding);
         if (newBid == null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
