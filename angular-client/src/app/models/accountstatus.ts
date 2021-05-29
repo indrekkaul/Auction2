@@ -1,2 +1,3 @@
-export class Accountstatus {
+export enum AccountStatus {
+  ACTIVE, INACTIVE, BLOCKED
 }

@@ -1,7 +1,7 @@
-import { Accountstatus } from './accountstatus';
+import { AccountStatus } from './accountstatus';
 
-describe('Accountstatus', () => {
+describe('AccountStatus', () => {
   it('should create an instance', () => {
-    expect(new Accountstatus()).toBeTruthy();
+    expect(new AccountStatus()).toBeTruthy();
   });
 });
