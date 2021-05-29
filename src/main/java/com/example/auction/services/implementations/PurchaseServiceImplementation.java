@@ -9,13 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class PurchaseServiceImplementation  implements PurchaseService {
 
-    private final PurchaseRepository purchaseRepository;
-
     @Autowired
-    public PurchaseServiceImplementation(PurchaseRepository purchaseRepository) {
-        this.purchaseRepository = purchaseRepository;
-    }
-
+    private  PurchaseRepository purchaseRepository;
 
     @Override
     public Purchase findOne(Long id) {

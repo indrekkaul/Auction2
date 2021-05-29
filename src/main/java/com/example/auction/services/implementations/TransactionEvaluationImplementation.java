@@ -12,12 +12,8 @@ import java.util.List;
 @Service
 public class TransactionEvaluationImplementation implements TransactionEvaluationService {
 
-    TransactionEvaluationRepository transactionEvaluationRepository;
-
     @Autowired
-    public TransactionEvaluationImplementation(TransactionEvaluationRepository transactionEvaluationRepository) {
-        this.transactionEvaluationRepository = transactionEvaluationRepository;
-    }
+    TransactionEvaluationRepository transactionEvaluationRepository;
 
     @Override
     public TransactionEvaluation findOne(Long id) {

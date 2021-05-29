@@ -18,7 +18,6 @@ public class UserAccount {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    //@Size(min = 5, message = "Name must be at least 5 characters long")
     private String accountName;
 
     private String email;

@@ -12,12 +12,8 @@ import java.util.List;
 @Service
 public class CategoryServiceImplementations implements CategoryService {
 
-    CategoryRepository categoryRepository;
-
     @Autowired
-    public CategoryServiceImplementations(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
+    private CategoryRepository categoryRepository;
 
     @Override
     public Category findOne(Long id) {

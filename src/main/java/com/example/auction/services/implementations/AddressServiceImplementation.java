@@ -13,13 +13,8 @@ import java.util.Optional;
 @Service
 public class AddressServiceImplementation implements AddressService {
 
-    private final AddressRepository addressRepository;
-
     @Autowired
-    public AddressServiceImplementation(AddressRepository addressRepository) {
-        this.addressRepository = addressRepository;
-    }
-
+    private AddressRepository addressRepository;
 
     @Override
     public Optional<Address> findOne(Long id) {

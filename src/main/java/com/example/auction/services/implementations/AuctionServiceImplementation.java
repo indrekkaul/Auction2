@@ -18,8 +18,6 @@ public class AuctionServiceImplementation implements AuctionService {
     @Autowired
     private AuctionRepository auctionRepository;
 
-
-
     @Override
     public Optional<Auction> findOne(Long id) {
         return Optional.ofNullable(auctionRepository.findById(id)
