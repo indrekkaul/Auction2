@@ -1,3 +1,7 @@
+import {AccountStatus} from "./accountstatus";
+import {AccountType} from "./account-type";
+import {Address} from "./address";
+
 export class UserAccount {
   constructor(private id: number,
               private accountName: string,

@@ -1,3 +1,7 @@
+import {UserAccount} from "./useraccount";
+import {Category} from "./category";
+import {Address} from "./address";
+
 export class Auction {
   constructor(private id: number,
     private title: string,
