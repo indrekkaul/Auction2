@@ -32,13 +32,13 @@ public class AuctionServiceImplementation implements AuctionService {
 
     @Override
     public List<Auction> findByEndigIsGreaterTheCurrentDate() {
-        return auctionRepository.findAllByEndingAfter(LocalDate.now());
+        return null;
     }
 
     @Override
     public List<Auction> findByActive(boolean active) {
-        auctionRepository.findAllByEndingAfter(LocalDate.now()).forEach(auction -> auction.setActive(false));
-        return auctionRepository.findByActive(true);
+        //auctionRepository.findAllByEndingIsBefore(LocalDate.now()).forEach(auction -> auction.setActive(false));
+        return auctionRepository.findAllByEndingAfterAndActive(LocalDate.now(),true);
     }
 
     @Override
@@ -57,6 +57,7 @@ public class AuctionServiceImplementation implements AuctionService {
             tempAuction.setItemCategory(newAuction.getItemCategory());
             tempAuction.setMinimumPrice(newAuction.getMinimumPrice());
             tempAuction.setTitle(newAuction.getTitle());
+            //tempAuction.setActive(newAuction.getActive());
 
             return auctionRepository.save(tempAuction);
         }else {

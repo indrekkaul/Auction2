@@ -17,7 +17,9 @@ public interface AuctionRepository extends JpaRepository<Auction, Long> {
 
     List<Auction> findByTitleContaining(String title);
 
-    List<Auction> findAllByEndingAfter(LocalDate localDate);
+    List<Auction> findAllByEndingAfterAndActive (LocalDate localDate, boolean active);
+
+
 
 
 }

@@ -31,11 +31,11 @@ public class AuctionController {
     }
 
     /**
-     * GET: <code>/auctions</code>
+     * GET: <code>/auction</code>
      * @return all auctions by Title in database
      * @param title to lookup the database for - optional
      */
-    @GetMapping("/auctions")
+    @GetMapping
     public ResponseEntity<List<Auction>> getAllAuctions(@RequestParam(required = false) String title){
         List<Auction> auctions = auctionService.findAll();
         if (auctions.isEmpty()){
@@ -47,13 +47,13 @@ public class AuctionController {
 
 
     /**
-     * GET: <code>/active_auctions</code>
+     * GET: <code>/auctions/active</code>
      * @return all active(NB! ending date is not passed) auctions in database
      *
      */
-    @GetMapping("/active_auctions")
+    @GetMapping("/active")
     public ResponseEntity<List<Auction>> getAllActiveAuctions(){
-        List<Auction> auctions = auctionService.findByEndigIsGreaterTheCurrentDate();
+        List<Auction> auctions = auctionService.findByActive(true);
         if (auctions.isEmpty()){
             return new ResponseEntity<>(Collections.emptyList(), HttpStatus.NO_CONTENT);
         }
@@ -68,7 +68,7 @@ public class AuctionController {
      * @param auction   The new auction
      * @return updated auction in database
      */
-    @PutMapping("/auction/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Auction> updateAuction(@PathVariable("id") Long id, @RequestBody Auction auction){
        Auction newAuction = auctionService.update(id,auction);
         if (newAuction == null){
@@ -83,7 +83,7 @@ public class AuctionController {
      * @param id The id of the auction to set in Active
      */
 
-    @DeleteMapping("/auction/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteAuction(@PathVariable("id") Long id){
         boolean success = auctionService.delete(id);
         if (success){

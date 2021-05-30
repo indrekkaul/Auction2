@@ -26,4 +26,6 @@ public interface AuctionService {
     boolean demoteAuction (Long id);
 
     void restore (Long id);
+
+    
 }
