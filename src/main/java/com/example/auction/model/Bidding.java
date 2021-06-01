@@ -16,9 +16,9 @@ public class Bidding {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToOne
+    @ManyToOne
     private Auction auction;
-    @OneToOne
+    @ManyToOne
     private UserAccount user;
 
     private BigDecimal price;

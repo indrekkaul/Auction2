@@ -1,8 +1,11 @@
 package com.example.auction.services;
 
 
+import com.example.auction.model.Auction;
 import com.example.auction.model.Bidding;
 import com.example.auction.model.UserAccount;
+
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,9 +16,9 @@ public interface BiddingService {
 
     List<Bidding> findByUserAndActive (UserAccount userAccount, boolean active);
 
-    List<Bidding> findBidsByAuction(Long auction_Id);
+    List<Bidding> findBidsByAuction(Auction auction);
 
-    Bidding getNumberOfBidsForAuction(Long auction_id);
+    Bidding getNumberOfBidsForAuction(Auction auction);
 
     List<Bidding> findAll();
 
@@ -23,7 +26,9 @@ public interface BiddingService {
 
     Bidding update(Long id, Bidding newBid);
 
-    Bidding getBestBid(Long id);
+    BigDecimal getBestBid(Auction auction);
+
+    Bidding getBestBidding(Auction auction);
 
     boolean delete(Long id);
 

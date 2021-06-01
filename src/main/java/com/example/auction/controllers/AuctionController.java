@@ -19,7 +19,7 @@ public class AuctionController {
 
 
     /**
-     * POST: <code>/new_auction</code>
+     * POST: <code>/auction</code>
      *
      * @param auction The Auction to persist in database
      * @return created auction
@@ -80,7 +80,7 @@ public class AuctionController {
     /**
      * DELETE: <code>/auction/id</code>
      *
-     * @param id The id of the auction to set in Active
+     * @param id The id of the auction to set inActive
      */
 
     @DeleteMapping("/{id}")

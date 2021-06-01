@@ -3,13 +3,12 @@ package com.example.auction.services.implementations;
 import com.example.auction.model.Auction;
 import com.example.auction.model.Bidding;
 import com.example.auction.model.UserAccount;
-import com.example.auction.repositorys.AuctionRepository;
 import com.example.auction.repositorys.BiddingRepository;
 import com.example.auction.services.BiddingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -32,14 +31,14 @@ public class BiddingServiceImplementations implements BiddingService {
     }
 
     @Override
-    public List<Bidding> findBidsByAuction(Long auction_id) {
-        List<Bidding> bidsByAuction = biddingRepository.findBiddingsByAuction(auction_id);
+    public List<Bidding> findBidsByAuction(Auction auction) {
+        List<Bidding> bidsByAuction = biddingRepository.findBiddingsByAuction(auction);
         return bidsByAuction;
     }
 
     @Override
-    public Bidding getNumberOfBidsForAuction(Long auction_id) {
-        return biddingRepository.countBiddingsByAuction(auction_id);
+    public Bidding getNumberOfBidsForAuction(Auction auction) {
+        return biddingRepository.countBiddingsByAuction(auction);
     }
 
     @Override
@@ -50,14 +49,7 @@ public class BiddingServiceImplementations implements BiddingService {
     @Override
     public Bidding save(Bidding bidding) {
 
-         biddingRepository.saveAndFlush(bidding);
-         Auction auction = bidding.getAuction();
-
-         if (auction.getBuyNowPrice().compareTo(bidding.getPrice())==-1
-                 | auction.getBuyNowPrice().compareTo(bidding.getPrice())==0){
-            auction.setActive(false);
-         }
-         return null;
+        return biddingRepository.saveAndFlush(bidding);
     }
 
     @Override
@@ -90,9 +82,24 @@ public class BiddingServiceImplementations implements BiddingService {
     }
 
     @Override
-    public Bidding getBestBid(Long auction_id) {
-        Bidding winnerBid = Collections.max(findBidsByAuction(auction_id), Comparator.comparing(Bidding::getPrice));
-        return winnerBid;
+    public BigDecimal getBestBid(Auction auction) {
+        List<Bidding> biddingList = findBidsByAuction(auction);
+        BigDecimal max = biddingList
+                .stream()
+                .map(a -> a.getPrice())
+                .max(Comparator.naturalOrder())
+                .orElse(BigDecimal.ZERO);
+       return max;
+    }
+
+    @Override
+    public Bidding getBestBidding(Auction auction) {
+        List<Bidding> biddingList = findBidsByAuction(auction);
+        Bidding maxBidding = biddingList
+                .stream()
+                .max(Comparator.comparing(p -> p.getPrice()))
+                .get();
+        return maxBidding;
     }
 
 

@@ -17,9 +17,9 @@ public interface BiddingRepository extends JpaRepository<Bidding, Long>{
 
     List<Bidding> findByAuctionAndActive(Auction auction, boolean active);
 
-    List<Bidding> findBiddingsByAuction(Long auction);
+    List<Bidding> findBiddingsByAuction(Auction auction);
 
-    Bidding countBiddingsByAuction(Long auction_id);
+    Bidding countBiddingsByAuction(Auction auction);
 
 
 
