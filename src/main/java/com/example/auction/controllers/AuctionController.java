@@ -35,7 +35,7 @@ public class AuctionController {
      * @return all auctions
      *
      */
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Auction>> getAllAuctions(@RequestParam(required = false) String title){
         List<Auction> auctions = auctionService.findAll();
         if (auctions.isEmpty()){
@@ -66,8 +66,7 @@ public class AuctionController {
      *
      */
     @GetMapping("/{title}")
-    public ResponseEntity<List<Auction>> getAllByTitleContaining
-                (@PathVariable("title") String title){
+    public ResponseEntity<List<Auction>> getAllByTitleContaining(@PathVariable("title") String title){
         List<Auction> auctions = auctionService.findAllByTitleContaining(title);
 
         if (auctions.isEmpty()){

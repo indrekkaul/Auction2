@@ -6,9 +6,7 @@ import com.example.auction.services.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class AddressServiceImplementation implements AddressService {
@@ -85,5 +83,43 @@ public class AddressServiceImplementation implements AddressService {
         addressRestore.setActive(true);
         save(addressRestore);
 
+    }
+
+    @Override
+    public List<Address> findAllByStreetContaining(String string) {
+        List<Address> addressesByContainingStreet = new ArrayList<>(addressRepository.findAllByStreetContaining(string));
+        return addressesByContainingStreet;
+
+    }
+
+    @Override
+    public List<Address> findAllByCountryContaining(String string) {
+            List<Address> addressesByContainingCountry = new ArrayList<>(addressRepository.findAllByCountryContaining(string));
+            return addressesByContainingCountry;
+
+    }
+
+    @Override
+    public List<Address> findAllByZipContaining(String string) {
+            List<Address> addressesByContainingZip = new ArrayList<>(addressRepository.findAllByZipContaining(string));
+            return addressesByContainingZip;
+
+    }
+
+    @Override
+    public List<Address> findAllByCityContaining(String string) {
+            List<Address> addressesByContainingCity = new ArrayList<>(addressRepository.findAllByCityContaining(string));
+            return addressesByContainingCity;
+    }
+
+    public List<Address> findAllContainingString (String string){
+        List<Address> addressesContainingString = findAllByStreetContaining(string);
+        addressesContainingString.addAll(findAllByZipContaining(string));
+        addressesContainingString.addAll(findAllByCityContaining(string));
+        addressesContainingString.addAll(findAllByCountryContaining(string));
+        Set<Address> removeDuplicates = new LinkedHashSet<>(addressesContainingString);
+        addressesContainingString.clear();
+        addressesContainingString.addAll(removeDuplicates);
+        return addressesContainingString;
     }
 }

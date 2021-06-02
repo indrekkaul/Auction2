@@ -15,4 +15,16 @@ public interface AddressRepository extends JpaRepository<Address, Long> {
 
     List<Address> findAllByStreet(String street);
 
+    List<Address> findAllByCountry(String country);
+
+    List<Address> findAllByCityContaining(String string);
+
+    List<Address> findAllByStreetContaining(String string);
+
+    List<Address> findAllByCountryContaining(String string);
+
+    List<Address> findAllByZipContaining(String string);
+
+
+
 }

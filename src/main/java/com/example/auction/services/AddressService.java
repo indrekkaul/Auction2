@@ -22,4 +22,15 @@ public interface AddressService {
     boolean delete(Long id);
 
     void restore(Long id);
+
+    List<Address> findAllByCityContaining(String string);
+
+    List<Address> findAllByStreetContaining(String string);
+
+    List<Address> findAllByCountryContaining(String string);
+
+    List<Address> findAllByZipContaining(String string);
+
+    List<Address> findAllContainingString (String string);
+
 }
