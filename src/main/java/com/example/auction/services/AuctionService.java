@@ -11,6 +11,8 @@ public interface AuctionService {
 
     List<Auction> findAll();
 
+    List<Auction> findAllByTitleContaining(String title);
+
     List<Auction> findByActive(boolean active);
 
     List<Auction> findByEndigIsGreaterTheCurrentDate();

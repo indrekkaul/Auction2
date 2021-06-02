@@ -32,8 +32,8 @@ public class AuctionController {
 
     /**
      * GET: <code>/auction</code>
-     * @return all auctions by Title in database
-     * @param title to lookup the database for - optional
+     * @return all auctions
+     *
      */
     @GetMapping
     public ResponseEntity<List<Auction>> getAllAuctions(@RequestParam(required = false) String title){
@@ -54,6 +54,22 @@ public class AuctionController {
     @GetMapping("/active")
     public ResponseEntity<List<Auction>> getAllActiveAuctions(){
         List<Auction> auctions = auctionService.findByActive(true);
+        if (auctions.isEmpty()){
+            return new ResponseEntity<>(Collections.emptyList(), HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(auctions,HttpStatus.OK);
+    }
+
+    /**
+     * GET: <code>/auctions/title</code>
+     * @return all auctions by title containing
+     *
+     */
+    @GetMapping("/{title}")
+    public ResponseEntity<List<Auction>> getAllByTitleContaining
+                (@PathVariable("title") String title){
+        List<Auction> auctions = auctionService.findAllByTitleContaining(title);
+
         if (auctions.isEmpty()){
             return new ResponseEntity<>(Collections.emptyList(), HttpStatus.NO_CONTENT);
         }
