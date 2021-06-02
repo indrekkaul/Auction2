@@ -3,18 +3,25 @@ package com.example.auction.services;
 import com.example.auction.model.Category;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CategoryService {
 
-    Category findOne(Long id);
+    Optional<Category> findOne(Long id);
 
     List<Category> findAll();
 
-    void save (Category category);
+    List<Category> findAllByNameContaining(String string);
 
-    void update(Long id, Category category);
+    List<Category> findAllByDescriptionContaining(String string);
 
-    void delete (Long id);
+    List<Category> findAllByContainingString (String string);
+
+    Category save (Category category);
+
+    Category update(Long id, Category newCategory);
+
+    boolean delete (Long id);
 
     void restore(Long id);
 

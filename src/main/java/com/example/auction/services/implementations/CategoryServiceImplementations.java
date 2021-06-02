@@ -6,8 +6,7 @@ import com.example.auction.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class CategoryServiceImplementations implements CategoryService {
@@ -16,9 +15,9 @@ public class CategoryServiceImplementations implements CategoryService {
     private CategoryRepository categoryRepository;
 
     @Override
-    public Category findOne(Long id) {
-        return categoryRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Category not found!"));
+    public Optional<Category> findOne(Long id) {
+        return Optional.ofNullable(categoryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Category not found!")));
     }
 
     @Override
@@ -28,30 +27,55 @@ public class CategoryServiceImplementations implements CategoryService {
     }
 
     @Override
-    public void save(Category category) {
-        categoryRepository.saveAndFlush(category);
+    public List<Category> findAllByNameContaining(String string) {
+        List<Category> categoriesContainingName = new ArrayList<>(categoryRepository.findAllByNameContaining(string));
+        return categoriesContainingName;
     }
 
     @Override
-    public void update(Long id, Category category) {
-        Category oldCategory = findOne(category.getId());
-        oldCategory.setDescription(category.getDescription());
-        oldCategory.setName(category.getName());
-
-        save(oldCategory);
+    public List<Category> findAllByDescriptionContaining(String string) {
+        List<Category> categoriesContainingDescription = new ArrayList<>(categoryRepository.findAllByDescriptionContaining(string));
+        return categoriesContainingDescription;
+    }
+    @Override
+    public List<Category> findAllByContainingString (String string){
+        List<Category> categoriesByString = findAllByDescriptionContaining(string);
+        categoriesByString.addAll(findAllByNameContaining(string));
+        Set<Category> removeDuplicates = new LinkedHashSet<>(categoriesByString);
+        categoriesByString.clear();
+        categoriesByString.addAll(removeDuplicates);
+        return categoriesByString;
     }
 
     @Override
-    public void delete(Long id) {
-        Category categoryDelete = findOne(id);
+    public Category save(Category category) {
+        return categoryRepository.saveAndFlush(category);
+    }
+
+    @Override
+    public Category update(Long id, Category newCategory) {
+        Optional<Category> oldCategory = findOne(id);
+        if (oldCategory.isPresent()){
+            Category tempCategory = oldCategory.get();
+            tempCategory.setName(newCategory.getName());
+            tempCategory.setDescription(newCategory.getDescription());
+            return save(tempCategory);
+        }else {
+            throw new RuntimeException("Cant update, provided record does not exists!");
+        }
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        Category categoryDelete = categoryRepository.getOne(id);
         categoryDelete.setActive(false);
         save(categoryDelete);
-
+        return true;
     }
 
     @Override
     public void restore(Long id) {
-        Category categoryRestore = findOne(id);
+        Category categoryRestore = categoryRepository.getOne(id);
         categoryRestore.setActive(true);
         save(categoryRestore);
     }
