@@ -65,7 +65,7 @@ public class CategoryController {
      * @return updated category in database
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Category> updateCategory(@PathVariable("id") Long id, @ResponseBody Category category){
+    public ResponseEntity<Category> updateCategory(@PathVariable("id") Long id, @RequestBody Category category){
         Category newCategory = categoryService.update(id,category);
         if (newCategory == null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
