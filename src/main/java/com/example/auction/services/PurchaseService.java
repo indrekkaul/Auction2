@@ -1,16 +1,28 @@
 package com.example.auction.services;
 
 import com.example.auction.model.Purchase;
+import com.example.auction.model.UserAccount;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface PurchaseService {
 
     Purchase findOne(Long id);
 
-    void save(Purchase purchase);
+    Optional<Purchase> findById(Long id);
 
-    void update(Long id, Purchase purchase);
+    Purchase save(Purchase purchase);
 
-    void delete(Long id);
+    Purchase update(Long id, Purchase newPurchase);
+
+    List<Purchase> findAll();
+
+    List<Purchase> findAllBySeller (UserAccount seller);
+
+    List<Purchase> findAllByBuyer (UserAccount buyer);
+
+    boolean delete(Long id);
 
     void restore(Long id);
 }

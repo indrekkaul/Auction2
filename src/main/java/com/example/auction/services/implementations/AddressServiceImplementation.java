@@ -64,7 +64,7 @@ public class AddressServiceImplementation implements AddressService {
 
             return save(tempAddress);
         }else {
-            throw new RuntimeException("Cant Update!");
+            throw new RuntimeException("Cant update record does not exists in database!");
         }
     }
 
