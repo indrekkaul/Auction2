@@ -6,6 +6,9 @@ import com.example.auction.services.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class UserAccountServiceImplementation  implements UserAccountService {
 
@@ -19,28 +22,44 @@ public class UserAccountServiceImplementation  implements UserAccountService {
     }
 
     @Override
-    public void save(UserAccount userAccount) {
-        userAccountRepository.saveAndFlush(userAccount);
+    public Optional<UserAccount> findById(Long id) {
+        return Optional.ofNullable(userAccountRepository.findById(id))
+                .orElseThrow(()-> new RuntimeException(("User not found!")));
     }
 
     @Override
-    public void update(Long id, UserAccount userAccount) {
-        UserAccount oldUser = findOne(userAccount.getId());
-        oldUser.setAccountName(userAccount.getAccountName());
-        oldUser.setAccountStatus(userAccount.getAccountStatus());
-        oldUser.setAccountType(userAccount.getAccountType());
-        oldUser.setAddress(userAccount.getAddress());
-        oldUser.setEmail(userAccount.getEmail());
-
-        save(oldUser);
+    public List<UserAccount> findAll() {
+        List<UserAccount> findAll = userAccountRepository.findAll();
+        return findAll;
     }
 
     @Override
-    public void delete(Long id) {
+    public UserAccount save(UserAccount userAccount)  {
+        return userAccountRepository.saveAndFlush(userAccount);
+    }
+
+    @Override
+    public UserAccount update(Long id, UserAccount newUserAccount) {
+        Optional<UserAccount> oldUser = Optional.ofNullable(findOne(id));
+        if(oldUser.isPresent()){
+            UserAccount tempUser = oldUser.get();
+            tempUser.setAccountStatus(newUserAccount.getAccountStatus());
+            tempUser.setAccountType(newUserAccount.getAccountType());
+            tempUser.setAccountName(newUserAccount.getAccountName());
+            tempUser.setAddress(newUserAccount.getAddress());
+            tempUser.setEmail(newUserAccount.getEmail());
+            tempUser.setPassword(newUserAccount.getPassword());
+            return save(tempUser);
+        }
+        throw new RuntimeException("Cant update record does not exists in database!");
+    }
+
+    @Override
+    public boolean delete(Long id) {
         UserAccount deleteUser = findOne(id);
         deleteUser.setActive(false);
         save(deleteUser);
-
+        return true;
     }
 
     @Override

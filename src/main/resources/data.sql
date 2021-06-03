@@ -1,7 +1,7 @@
+delete from purchase_auctions;
+delete from purchase;
 delete from bidding;
 delete from transaction_evaluation;
-delete from purchase;
-delete from purchase_auctions;
 delete from auction;
 delete from user_account;
 delete from category;
