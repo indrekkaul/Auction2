@@ -2,7 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Category} from '../../models/category';
 import {CategoryService} from '../../services/category.service'
-import {InteractionService} from '../../services/interaction.service';
 
 @Component({
   selector: 'app-category',
@@ -18,17 +17,16 @@ export class CategoryComponent implements OnInit, OnDestroy {
   private alive: boolean = true;
 
   constructor(private categoryService: CategoryService,
-              private interact: InteractionService,
               private router: Router) { }
 
   ngOnInit() {
     this.getCategories();
     this.subscribeCategoryListChanged();
-    this.interact._categoryTabToggled
+    //this.interact._categoryTabToggled
       //.takeWhile(() => this.alive)
-      .subscribe(() => {
-        this.isOpen = !this.isOpen;
-      })
+      // .subscribe(() => {
+      //   this.isOpen = !this.isOpen;
+      // })
   }
 
   getCategories() {
@@ -41,18 +39,18 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
   changeCategory(category) {
     if (category) {
-      this.interact.categoryChange(category);
+      // this.interact.categoryChange(category);
       this.isOpen = false;
       this.router.navigate(['/auctions', {category: category}]);
     }
   }
 
   subscribeCategoryListChanged() {
-    this.interact._categoryListChanged
+    // this.interact._categoryListChanged
      // .takeWhile(() => this.alive)
-      .subscribe(() => {
-        this.getCategories();
-      })
+     //  .subscribe(() => {
+     //    this.getCategories();
+     //  })
   }
 
   ngOnDestroy() {
