@@ -4,46 +4,33 @@ import { Observable } from 'rxjs';
 import {ConfigService} from "./config.service";
 import {Auction} from "../models/auction";
 
-const auctions = 'http://localhost:8080/auctions'
+//const auctions = 'http://localhost:8080/auctions'
+//const create = 'http://localhost:8080/new_auctions'
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuctionService {
 
-  constructor(private http: HttpClient,
-               private config: ConfigService) { }
+  private readonly auctionUrl: string;
+  private readonly auctionAll: string;
 
-  uri() {
-    return this.config.getApi() + 'auctions'
+  constructor(private http: HttpClient) {
+    this.auctionUrl = 'http://localhost:8080/auction';
+      this.auctionAll = 'http://localhost:8080/auction/all';
   }
 
-  findAll(): Observable<Auction[]> {
-    return this.http.get<Auction[]>(this.uri());
-  }
-
-  // Optional<Auction> findOne(Long id);
-findOne(id: number): Observable<Auction> {
-    return this.http.get<Auction>(this.uri() + '/' + id);
+  public getAll(): Observable<Auction[]> {
+    return this.http.get<Auction[]>(this.auctionAll);
   }
 
 
-  // List<Auction> findAll();
-  //
-  // List<Auction> findByActive(boolean active);
-  //
-  // List<Auction> findByEndigIsGreaterTheCurrentDate();
-  //
-  // Auction save (Auction auction);
-  //
-  // Auction update(Long id, Auction newAuction);
-  //
-  // boolean delete (Long id);
-  //
-  // boolean promoteAuction (Long id);
-  //
-  // boolean demoteAuction (Long id);
-  //
-  // void restore (Long id);
+  public save(auction: Auction) {
+    return this.http.post<Auction>(this.auctionUrl, auction);
+  }
+
+
+
 }
 

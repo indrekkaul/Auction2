@@ -8,10 +8,10 @@ import { AuctionComponent } from './components/auction/auction.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import { CategoryComponent } from './components/category/category.component';
-
 import { AddAuctionComponent } from './components/auction/add-auction/add-auction.component';
-import { ActiveAuctionComponent } from './components/auction/active-auction/active-auction.component';
 import { ActiveAuctionsComponent } from './components/auction/active-auctions/active-auctions.component';
+import {AuctionService} from "./services/auction.service";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -19,18 +19,18 @@ import { ActiveAuctionsComponent } from './components/auction/active-auctions/ac
     AppComponent,
     NavbarComponent,
     AuctionComponent,
-    CategoryComponent
+    CategoryComponent,
     AddAuctionComponent,
-    ActiveAuctionComponent,
     ActiveAuctionsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
-  providers: [],
+  providers: [AuctionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,1 +1,76 @@
-<p>add-auction works!</p>
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #auctionForm="ngForm">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" [(ngModel)]="auction.title"
+               class="form-control"
+               id="title"
+               name="title"
+               placeholder="Enter Title"
+               required #title="ngModel">
+      </div>
+      <div [hidden]="!title.pristine" class="alert alert-danger">Title is required</div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" [(ngModel)]="auction.description"
+               class="form-control"
+               id="description"
+               name="description"
+               placeholder="Enter Description"
+               required #description="ngModel">
+      </div>
+      <div [hidden]="!description.pristine" class="alert alert-danger">Description is required</div>
+      <div class="form-group">
+        <label for="minimumPrice">Minimum Price</label>
+        <input type="text" [(ngModel)]="auction.minimumPrice"
+               class="form-control"
+               id="minimumPrice"
+               name="minimumPrice"
+               placeholder="Enter Title"
+               required #minimumPrice="ngModel">
+      </div>
+      <div [hidden]="!minimumPrice.pristine" class="alert alert-danger">Minimum Price is required</div>
+      <div class="form-group">
+        <label for="buyNowPrice">Buy Now Price</label>
+        <input type="text" [(ngModel)]="auction.buyNowPrice"
+               class="form-control"
+               id="buyNowPrice"
+               name="buyNowPrice"
+               placeholder="Enter Title"
+               required #buyNowPrice="ngModel">
+      </div>
+      <div [hidden]="!buyNowPrice.pristine" class="alert alert-danger">Buy Now Price is required</div>
+      <div class="form-group row">
+        <label class="col-form-label col-sm-4">Ending Date:   </label>
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control"
+                     placeholder="yyyy-mm-dd"
+                     id="ending"
+                     required #ending="ngModel"
+                     name="ending" [(ngModel)]="auction.ending" ngbDatepicker #d="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div [hidden]="!ending.pristine" class="alert alert-danger">Ending Date is required</div>
+
+  <!--    <div class="form-group">
+        <label for="ending">Ending Date</label>
+        <input type="text" [(ngModel)]="auction.ending"
+               class="form-control"
+               id="ending"
+               name="ending"
+               placeholder="Enter Ending"
+               required #ending="ngModel">
+      </div>
+      <div [hidden]="!ending.pristine" class="alert alert-danger">Ending Date is required</div>-->
+
+      <button type="submit" [disabled]="!auctionForm.form.valid"
+              class="btn btn-info">Submit</button>
+    </form>
+  </div>
+</div>

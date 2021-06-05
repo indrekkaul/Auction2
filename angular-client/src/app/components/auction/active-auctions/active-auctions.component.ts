@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Auction} from "../../../models/auction";
+import { AuctionService} from "../../../services/auction.service";
 
 @Component({
   selector: 'app-active-auctions',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ActiveAuctionsComponent implements OnInit {
 
-  constructor() { }
+  auctions : Auction[];
+
+  constructor(private auctionService: AuctionService) { }
 
   ngOnInit(): void {
+    this.auctionService.getAll().subscribe(data =>{
+      this.auctions = data;
+    });
   }
 
 }

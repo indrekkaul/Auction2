@@ -1,1 +1,40 @@
-<p>active-auctions works!</p>
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Item Category</th>
+        <th scope="col">Seller</th>
+        <th scope="col">Created</th>
+        <th scope="col">Location</th>
+        <th scope="col">Buy Now Price</th>
+        <th scope="col">Minimum Price</th>
+        <th scope="col">Promoted</th>
+        <th scope="col">Active</th>
+        <th scope="col">Ending</th>
+        <th scope="col">numberOfVisits</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let auction of auctions">
+        <td>{{ auction.id }}</td>
+        <td>{{ auction.title }}</td>
+        <td>{{ auction.description}}</td>
+        <td>{{ auction.itemCategory}}</td>
+        <td>{{ auction.seller}}</td>
+        <td>{{ auction.created}}</td>
+        <td>{{ auction.userLocation}}</td>
+        <td>{{ auction.buyNowPrice}}</td>
+        <td>{{ auction.minimumPrice}}</td>
+        <td>{{ auction.isPromotedToPremium}}</td>
+        <td>{{ auction.active}}</td>
+        <td>{{ auction.ending}}</td>
+        <td>{{ auction.numberOfVisits}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
