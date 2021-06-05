@@ -9,7 +9,7 @@ const routes: Routes = [
   {     path: 'auctions', component: ActiveAuctionsComponent  },
   {     path: 'addauction', component: AddAuctionComponent  },
   {     path: 'categorys', component: CategoryComponent  }
-  //{     path: '', redirectTo: 'auctions' pathMatch 'full'  }
+  ///{     path: '', redirectTo: 'auctions' pathMatch 'full'  }
 
 
 

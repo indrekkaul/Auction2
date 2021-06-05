@@ -16,6 +16,7 @@ export class AddAuctionComponent {
   auction: Auction;
 
 
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private auctionService: AuctionService

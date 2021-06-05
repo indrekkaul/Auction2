@@ -13,21 +13,22 @@ import {Auction} from "../models/auction";
 })
 export class AuctionService {
 
-  private readonly auctionUrl: string;
-  private readonly auctionAll: string;
+  private readonly auctionAddUrl: string;
+  private readonly auctionAllUrl: string;
+
 
   constructor(private http: HttpClient) {
-    this.auctionUrl = 'http://localhost:8080/auction';
-      this.auctionAll = 'http://localhost:8080/auction/all';
+    this.auctionAddUrl = 'http://localhost:8080/auction';
+      this.auctionAllUrl = 'http://localhost:8080/auction/all';
   }
 
   public getAll(): Observable<Auction[]> {
-    return this.http.get<Auction[]>(this.auctionAll);
+    return this.http.get<Auction[]>(this.auctionAllUrl);
   }
 
 
   public save(auction: Auction) {
-    return this.http.post<Auction>(this.auctionUrl, auction);
+    return this.http.post<Auction>(this.auctionAddUrl, auction);
   }
 
 

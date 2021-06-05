@@ -22,6 +22,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CategoryComponent,
     AddAuctionComponent,
     ActiveAuctionsComponent
+    //
   ],
   imports: [
     BrowserModule,
