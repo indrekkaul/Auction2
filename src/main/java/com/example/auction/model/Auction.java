@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -24,6 +25,9 @@ public class Auction {
 
     @ManyToOne
     private UserAccount seller;
+
+    @OneToMany(mappedBy = "auction")
+    private List<Bidding> biddingList;
 
     @OneToOne
     private Category itemCategory;

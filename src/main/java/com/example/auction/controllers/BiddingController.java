@@ -33,7 +33,7 @@ public class BiddingController {
     public ResponseEntity<Bidding> createBid(@RequestBody Bidding bidding) {
         Bidding newBidding = biddingService.save(bidding);
         return new ResponseEntity<>(newBidding, HttpStatus.CREATED);
-/*        BigDecimal highestPrice = biddingService.getBestBid(bidding.getAuction().getId());
+/*        BigDecimal highestPrice = biddingService.getBestBid(bidding.getAuction());
         BigDecimal priceNow = bidding.getPrice();
 
 

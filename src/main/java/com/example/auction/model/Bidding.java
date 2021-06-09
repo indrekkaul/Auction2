@@ -16,8 +16,10 @@ public class Bidding {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @ManyToOne
     private Auction auction;
+
     @ManyToOne
     private UserAccount user;
 
