@@ -3,6 +3,7 @@ import {Category} from "./category";
 import {Address} from "./address";
 
 export class Auction {
+
     id: number;
     title: string;
     description: string;

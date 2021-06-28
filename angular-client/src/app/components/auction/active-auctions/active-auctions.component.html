@@ -23,15 +23,15 @@
         <td>{{ auction.id }}</td>
         <td>{{ auction.title }}</td>
         <td>{{ auction.description}}</td>
-        <td>{{ auction.itemCategory}}</td>
-        <td>{{ auction.seller}}</td>
-        <td>{{ auction.created}}</td>
-        <td>{{ auction.userLocation}}</td>
+        <td>{{ auction.itemCategory.name}}</td>
+        <td>{{ auction.seller.accountName}}</td>
+        <td>{{ auction.created | date}}</td>
+        <td>{{ auction.userLocation.city}}</td>
         <td>{{ auction.buyNowPrice}}</td>
         <td>{{ auction.minimumPrice}}</td>
         <td>{{ auction.isPromotedToPremium}}</td>
         <td>{{ auction.active}}</td>
-        <td>{{ auction.ending}}</td>
+        <td>{{ auction.ending | date}}</td>
         <td>{{ auction.numberOfVisits}}</td>
       </tr>
       </tbody>

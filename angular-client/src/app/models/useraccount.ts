@@ -4,7 +4,7 @@ import {Address} from "./address";
 
 export class UserAccount {
   constructor(private id: number,
-              private accountName: string,
+              public accountName: string,
               private email: string,
               private password: string,
               private address: Address,
